@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PaymentContext.Shared.Entities;
 using PaymentContext.Domain.ValueObjects;
 
 namespace PaymentContext.Domain.Entities;
 
-public class Student
+public class Student : Entity
 {
     private readonly IList<Subscription> _subscriptions;
 
@@ -22,7 +23,7 @@ public class Student
     public Name Name { get; private set; }
     public Document Document { get; private set; }
     public Email Email { get; private set; }
-    public string Address { get; private set; }
+    public Address Address { get; private set; }
     public IReadOnlyCollection<Subscription> Subscriptions { get { return _subscriptions.ToArray(); } }
 
     public void AddSubscription(Subscription subscription)

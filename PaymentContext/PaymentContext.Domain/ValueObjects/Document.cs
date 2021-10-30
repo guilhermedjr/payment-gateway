@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PaymentContext.Domain.Enums;
+using PaymentContext.Shared.ValueObjects;
 
 namespace PaymentContext.Domain.ValueObjects;
 
-public class Document
+public class Document : ValueObject
 {
     public Document(string number, EDocumentType type)
     {
