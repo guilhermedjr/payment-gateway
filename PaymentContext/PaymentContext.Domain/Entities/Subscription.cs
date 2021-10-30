@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace PaymentContext.Domain.Entities;
 
-namespace PaymentContext.Domain.Entities;
-
-public class Subscription
+public class Subscription : Entity
 {
     private readonly IList<Payment> _payments;
 
@@ -27,6 +21,11 @@ public class Subscription
 
     public void AddPayment(Payment payment)
     {
+        AddNotifications(new Contract<Payment>()
+            .Requires()
+            .IsGreaterThan(DateTime.Now, payment.PaidDate, "Subscription.Payments",
+                "A data do pagamento deve ser no futuro")
+        );
         _payments.Add(payment);
     }
 

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PaymentContext.Shared.Entities;
-using PaymentContext.Domain.ValueObjects;
-
-namespace PaymentContext.Domain.Entities;
+﻿namespace PaymentContext.Domain.Entities;
 
 public class Student : Entity
 {
@@ -18,6 +10,8 @@ public class Student : Entity
         Document = document;
         Email = email;
         _subscriptions = new List<Subscription>();
+
+        AddNotifications(document, email);
     }
 
     public Name Name { get; private set; }
@@ -28,10 +22,18 @@ public class Student : Entity
 
     public void AddSubscription(Subscription subscription)
     {
-        foreach (var sub in Subscriptions)
-            sub.Inactivate();
-       
-        _subscriptions.Add(subscription);
+        var hasSubscriptionActive = false;
+        foreach (var sub in _subscriptions)
+        {
+            if (sub.Active)
+            {
+                hasSubscriptionActive = true;
+                break;
+            }
+        }
+
+        if (hasSubscriptionActive)
+            AddNotification("Student.Subscriptions", "Você já tem uma assinatura ativa");
     }
 }
 
