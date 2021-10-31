@@ -1,11 +1,14 @@
 ﻿namespace PaymentContext.Domain.Handlers;
 
-public class BoletoSubscriptionHandler : IHandler<CreateBoletoSubscriptionCommand>
+public class SubscriptionHandler : 
+    IHandler<CreateBoletoSubscriptionCommand>,
+    IHandler<CreateCreditCardSubscriptionCommand>,
+    IHandler<CreatePayPalSubscriptionCommand>
 {
     private readonly IStudentRepository _studentsRepository;
     private readonly IEmailService _emailService;
 
-    public BoletoSubscriptionHandler(
+    public SubscriptionHandler(
         IStudentRepository studentRepository,
         IEmailService emailService
        )
@@ -44,6 +47,16 @@ public class BoletoSubscriptionHandler : IHandler<CreateBoletoSubscriptionComman
             $"Olá, {student.Name.FirstName} {student.Name.LastName}, bem vindo!", false);
 
         return new CommandResult(true, "Assinatura realizada com sucesso");
+    }
+
+    public Task<ICommandResult> Handle(CreateCreditCardSubscriptionCommand command)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ICommandResult> Handle(CreatePayPalSubscriptionCommand command)
+    {
+        throw new NotImplementedException();
     }
 }
 
