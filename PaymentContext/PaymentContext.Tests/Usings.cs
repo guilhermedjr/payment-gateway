@@ -1,0 +1,9 @@
+﻿global using System;
+global using Microsoft.VisualStudio.TestTools.UnitTesting;
+global using PaymentContext.Domain.Entities;
+global using PaymentContext.Domain.ValueObjects;
+global using PaymentContext.Domain.Enums;
+global using PaymentContext.Domain.Commands;
+global using PaymentContext.Domain.Handlers;
+global using PaymentContext.Domain.Queries;
+global using PaymentContext.Tests.Mocks;
