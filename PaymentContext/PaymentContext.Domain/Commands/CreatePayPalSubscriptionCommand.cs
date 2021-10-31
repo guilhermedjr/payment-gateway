@@ -1,6 +1,6 @@
 ﻿namespace PaymentContext.Domain.Commands;
     
-public class CreatePayPalSubscriptionCommand
+public class CreatePayPalSubscriptionCommand : ICommand
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
